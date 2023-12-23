@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Destroyer</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto Condensed", sans-serif;
+      }
+      body {
+        overflow: hidden;
+      }
+      .nav {
+        display: flex;
+        width: 100%;
+        position: absolute;
+        color: white;
+        justify-content: center;
+      }
+      .inner {
+        height: 60px;
+        font-size: 30px;
+        gap: 20px;
+        display: flex;
+        background-color: black;
+        opacity: 0.8;
+        text-align: center;
+        width: 500px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0 0 20px 20px;
+      }
+      #score {
+        text-align: right;
+        min-width: 100px;
+      }
+      #timer {
+        color: black;
+        background-color: white;
+        padding: 10px;
+        min-width: 100px;
+        min-height: 40px;
+      }
+      #accuracy {
+        text-align: left;
+        min-width: 100px;
+      }
+      .crosshair {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: invert(100%) sepia(4%) saturate(372%) hue-rotate(21deg)
+          brightness(118%) contrast(100%);
+      }
+      .content {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        color: white;
+        font-size: 30px;
+      }
+      button {
+        color: white;
+        font-size: 30px;
+        width: 150px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: white;
+        color: black;
+      }
+      .hide {
+        display: none;
+      }
+      .settings {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .settings label {
+        min-width: 250px;
+        display: inline-block;
+      }
+      .settings span {
+        min-width: 50px;
+        display: inline-block;
+      }
+      select {
+        width: 200px;
+        height: 30px;
+        padding: 5px;
+      }
+      .card {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        gap: 10px;
+      }
+      .card:hover {
+        background-color: white;
+        color: black;
+      }
+      .container {
+        display: flex;
+        max-width: 600px;
+        flex-wrap: wrap;
+        gap: 20px;
+        text-align: center;
+      }
+      .card h2 {
+        font-size: 30px;
+      }
+      img {
+        border-radius: 5px;
+      }
+      .container button {
+        margin: auto;
+      }
+      .desc1 {
+        font-size: 15px;
+        text-align: right;
+      }
+
+      .desc3 {
+        font-size: 15px;
+        text-align: left;
+      }
+      .flex {
+        display: flex;
+      }
+      .img-container {
+        display: flex;
+        gap: 10px;
+      }
+      .img-container img {
+        border: 2px white solid;
+        cursor: pointer;
+      }
+      .logo {
+        filter: invert(100%) sepia(4%) saturate(372%) hue-rotate(21deg)
+          brightness(118%) contrast(100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav hide" id="nav">
+      <div class="inner">
+        <div class="top">
+          <p class="desc1">Score</p>
+          <p id="score"></p>
+        </div>
+        <div class="top">
+          <p id="timer"></p>
+        </div>
+        <div class="top">
+          <p class="desc3">Accuracy</p>
+          <p id="accuracy"></p>
+        </div>
+      </div>
+    </div>
+    <div class="content" id="menu">
+      <img src="logo.png" alt="" class="logo" width="500px" />
+      <button id="playButton">Play</button>
+      <button id="settingButton">Settings</button>
+    </div>
+
+    <div class="content hide" id="selectMode">
+      <img src="logo.png" alt="" class="logo" width="500px" />
+      <div class="container">
+        <div class="card" id="mode-1">
+          <video
+            src="gridshot.mkv"
+            width="250"
+            height="150"
+            autoplay
+            loop
+            muted
+            id="vid-1"
+          ></video>
+          <h2>Gridshot</h2>
+        </div>
+        <div class="card" id="mode-2">
+          <video
+            src="sixshot.mkv"
+            width="250"
+            height="150"
+            autoplay
+            loop
+            muted
+            id="vid-2"
+          ></video>
+          <h2>Sixshot</h2>
+        </div>
+        <div class="card" id="mode-3">
+          <video
+            src="headshot.mkv"
+            width="250"
+            height="150"
+            autoplay
+            loop
+            muted
+            id="vid-3"
+          ></video>
+          <h2>Headshot</h2>
+        </div>
+        <div class="card" id="mode-4">
+          <video
+            src="tracking.mkv"
+            width="250"
+            height="150"
+            autoplay
+            loop
+            muted
+            id="vid-4"
+          ></video>
+          <h2>Tracking</h2>
+        </div>
+        <button id="return">Return</button>
+      </div>
+    </div>
+
+    <div class="content hide" id="endSection">
+      <h2 id="end"></h2>
+      <button id="return2">Return</button>
+    </div>
+
+    <div class="content hide" id="settings">
+      <h2>Settings</h2>
+
+      <div class="settings">
+        <div>
+          <label for="crosshairColor">Crosshair Color</label>
+          <select id="crosshairColor">
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="cyan">Cyan</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="targetColor">Target Color</label>
+          <input type="color" id="targetColor" value="#FF0000" />
+          <span id="targetColorValue"></span>
+        </div>
+
+        <div>
+          <label for="volume">Volume</label>
+          <input type="range" id="volume" min="0" max="100" value="100" />
+          <span id="volumeValue">0</span>
+        </div>
+
+        <div>
+          <label for="sensitivity">Sensitivity</label>
+          <input type="range" id="sensitivity" min="1" max="10" value="5" />
+          <span id="sensitivityValue">0</span>
+        </div>
+
+        <div>
+          <label for="fov">FOV</label>
+          <input type="range" id="fov" min="20" max="50" value="30" />
+          <span id="fovValue">0</span>
+        </div>
+        <div class="flex" style="margin-bottom: 10px">
+          <label for="skybox">Skybox</label>
+          <div class="img-container">
+            <img
+              src="sky.png"
+              alt=""
+              width="40"
+              height="40"
+              id="sky"
+              style="border: 2px solid red"
+            />
+            <img src="black.png" alt="" width="40" height="40" id="black" />
+            <img src="gray.png" alt="" width="40" height="40" id="gray" />
+          </div>
+        </div>
+      </div>
+      <button id="saveButton">Save</button>
+    </div>
+
+    <img src="crosshair.png" alt="" class="crosshair hide" id="crosshair" />
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
