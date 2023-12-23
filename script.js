@@ -727,6 +727,7 @@ function animate() {
   camera.updateProjectionMatrix();
   if (stop == 1) {
     document.removeEventListener("mousedown", handleMouseDown);
+    document.removeEventListener("mousemove", handleMouseDown);
   } else if (mode == 4 && balls.length > 0) {
     if (score > 0) {
       let scoreElement = document.getElementById("score");
